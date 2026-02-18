@@ -1,0 +1,12 @@
+{
+  "name": "molyne",
+  "version": "1.0.0",
+  "description": "Molyne Logistics Static Site",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/murano1/molyne.git"
+  },
+  "scripts": {
+    "build": "echo 'No build needed'"
+  }
+}
