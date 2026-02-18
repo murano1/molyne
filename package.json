@@ -7,6 +7,6 @@
     "url": "git+https://github.com/murano1/molyne.git"
   },
   "scripts": {
-    "build": "echo 'No build needed'"
+    "build": "exit 0"
   }
 }
