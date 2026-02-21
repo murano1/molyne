@@ -81,8 +81,12 @@
         }
         .button-group {
             margin: 25px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
         }
-        .order-button, .cs-button {
+        .order-button, .cs-button, .guide-button {
             display: inline-block;
             background-color: #d4af37;
             color: #ffffff;
@@ -92,6 +96,11 @@
             font-size: 1.1em;
             font-weight: bold;
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .guide-button {
+            background-color: #004d40;
         }
         footer {
             margin-top: auto;
@@ -99,6 +108,53 @@
             text-align: center;
             font-size: 0.85em;
             color: #888;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            position: relative;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            max-width: 90%;
+            width: 640px;
+        }
+        .close-button {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            color: #fff;
+            background-color: #333;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .close-button:hover {
+            background-color: #d4af37;
+        }
+        #guide-video {
+            width: 100%;
+            border-radius: 5px;
         }
 
         /* Mobile Optimization */
@@ -135,15 +191,27 @@
             .button-group {
                 margin: 15px 0;
             }
-            .order-button, .cs-button {
+            .order-button, .cs-button, .guide-button {
                 width: 100%;
                 box-sizing: border-box;
-                padding: 10px;
+                padding: 12px;
                 font-size: 1em;
             }
             p { 
                 font-size: 0.95em; 
                 margin-bottom: 8px;
+            }
+            .modal-content {
+                 width: 95%;
+                 padding: 10px;
+            }
+            .close-button {
+                top: -5px;
+                right: -5px;
+                width: 25px;
+                height: 25px;
+                font-size: 20px;
+                line-height: 25px;
             }
         }
     </style>
@@ -152,12 +220,12 @@
     <div class="container">
         <header>
             <h1>📦 Molyne Logistics</h1>
-            
         </header>
         <p><strong>Molyne Logistics</strong>는 몰리네샵 공식<br> 주문전용 페이지입니다.</p>
         
         <div class="button-group">
             <a href="https://forms.gle/MaQH92izzBU5DM1JA" target="_blank" class="order-button">바로 주문하기</a>
+            <button id="open-guide-button" class="guide-button">주문서 작성방법</button>
         </div>
 
         <p>신속하고 안전한 배송을 위해 최선을 다하겠습니다.</p>
@@ -170,12 +238,9 @@
         <div class="features">
             <div class="feature-item">
                 <h3>🚀 신속하고 정확한 배송</h3>
-                
             </div>
-            
             <div class="feature-item">
                 <h3>💖 맞춤형 CS 지원</h3>
-                
             </div>
         </div>
     </div>
@@ -183,5 +248,41 @@
     <footer>
         <p>&copy; 2024 Molyne. All rights reserved.</p>
     </footer>
+
+    <!-- The Modal -->
+    <div id="video-modal" style="display: none;" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <video id="guide-video" width="100%" controls>
+          <source src="guide.mp4" type="video/mp4">
+          브라우저가 비디오 태그를 지원하지 않습니다.
+        </video>
+      </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("video-modal");
+        var btn = document.getElementById("open-guide-button");
+        var span = document.getElementsByClassName("close-button")[0];
+        var video = document.getElementById("guide-video");
+
+        btn.onclick = function() {
+          modal.style.display = "flex";
+        }
+
+        span.onclick = function() {
+          modal.style.display = "none";
+          video.pause();
+          video.currentTime = 0;
+        }
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+            video.pause();
+            video.currentTime = 0;
+          }
+        }
+    </script>
 </body>
 </html>
