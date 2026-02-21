@@ -1,4 +1,4 @@
-<!-- v1.0.2 - Automatic Deployment Test: 2026-02-18 -->
+<!-- v1.0.3 - Updated Order Page: 2026-02-21 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -56,6 +56,124 @@
             margin-bottom: 15px;
             font-size: 1em;
         }
+        
+        /* Video Section */
+        .video-section {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .video-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #004d40;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .video-container iframe, .video-container div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .video-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            background: #eee;
+            font-size: 0.9em;
+        }
+
+        /* Order Buttons */
+        .order-button-group {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .order-button {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #d4af37;
+            color: #ffffff;
+            padding: 15px 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .order-button:hover {
+            background-color: #bfa030;
+            transform: translateY(-2px);
+        }
+
+        /* Guide Section */
+        .guide-container {
+            display: flex;
+            gap: 15px;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+        .guide-item {
+            flex: 1;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            border-left: 4px solid #d4af37;
+        }
+        .guide-item .title {
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .guide-item .desc {
+            color: #666;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .guide-item .example {
+            color: #888;
+            font-style: italic;
+        }
+
+        /* Reassuring Text */
+        .reassuring-text {
+            background-color: #e0f2f1;
+            color: #00695c;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 20px 0;
+            font-size: 1em;
+            border: 1px dashed #00695c;
+        }
+
+        .cs-button {
+            display: inline-block;
+            background-color: #d4af37;
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
         .features {
             display: flex;
             justify-content: space-between;
@@ -78,20 +196,6 @@
             font-size: 0.9em;
             margin: 0;
         }
-        .button-group {
-            margin: 25px 0;
-        }
-        .order-button, .cs-button {
-            display: inline-block;
-            background-color: #d4af37;
-            color: #ffffff;
-            padding: 12px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1.1em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
         footer {
             margin-top: auto;
             padding: 15px;
@@ -103,46 +207,37 @@
         /* Mobile Optimization */
         @media (max-width: 480px) {
             .container, .cs-container {
-                padding: 10px;
+                padding: 15px;
                 margin: 8px auto;
             }
             header {
-                padding: 20px 10px;
-                margin: -10px -10px 10px -10px;
+                padding: 30px 10px;
+                margin: -15px -15px 15px -15px;
             }
             h1 { 
-                font-size: 1.6em; 
+                font-size: 1.8em; 
                 margin-bottom: 5px;
             }
-            header p { font-size: 0.95em; }
+            .order-button-group {
+                gap: 8px;
+            }
+            .order-button {
+                font-size: 0.9em;
+                padding: 12px 5px;
+            }
+            .guide-container {
+                flex-direction: column;
+                gap: 10px;
+            }
             .features {
                 flex-direction: column;
                 margin: 15px 0 0 0;
             }
             .feature-item {
                 margin-bottom: 5px;
-                padding: 8px;
-            }
-            .feature-item h3 {
-                font-size: 1em;
-                margin: 5px 0;
-            }
-            .cs-container h2 { 
-                font-size: 1.3em;
-                margin-bottom: 10px;
-            }
-            .button-group {
-                margin: 15px 0;
-            }
-            .order-button, .cs-button {
-                width: 100%;
-                box-sizing: border-box;
-                padding: 10px;
-                font-size: 1em;
             }
             p { 
                 font-size: 0.95em; 
-                margin-bottom: 8px;
             }
         }
     </style>
@@ -151,12 +246,42 @@
     <div class="container">
         <header>
             <h1>📦 Molyne Logistics</h1>
-            
         </header>
         <p><strong>Molyne Logistics</strong>는 몰리네샵 공식<br> 주문전용 페이지입니다.</p>
+
+        <!-- Video Section -->
+        <div class="video-section">
+            <div class="video-title">주문이 처음이신가요? 30초 만에 확인하기!</div>
+            <div class="video-container">
+                <!-- Replace with actual video embed code when available -->
+                <div class="video-placeholder">안내 영상이 준비 중입니다.</div>
+            </div>
+        </div>
+
+        <!-- Reassuring Text -->
+        <div class="reassuring-text">
+            막 적어주셔도 찰떡같이 알아보고 배송해 드립니다!
+        </div>
         
-        <div class="button-group">
-            <a href="https://forms.gle/MaQH92izzBU5DM1JA" target="_blank" class="order-button">바로 주문하기</a>
+        <!-- Order Buttons -->
+        <div class="order-button-group">
+            <a href="https://forms.gle/MaQH92izzBU5DM1JA" target="_blank" class="order-button">⚡ 단품 주문하기</a>
+            <a href="https://forms.gle/XGzpTsSPKMwdDq7x5" target="_blank" class="order-button">📦 묶음 주문하기</a>
+        </div>
+
+        <!-- Guide Section -->
+        <div class="guide-container">
+            <div class="guide-item">
+                <span class="title">단품 주문 가이드</span>
+                <span class="desc">"상품 딱 1개만 빠르게 주문하실 분"</span>
+                <span class="example">(예) 땡땡티셔츠 / 블랙 / L / 1개</span>
+            </div>
+            <div class="guide-item">
+                <span class="title">묶음 주문 가이드</span>
+                <span class="desc">"여러 종류를 한꺼번에 주문하실 분"</span>
+                <span class="desc" style="font-size: 0.9em; color: #d4af37;">쉼표(,)나 슬러시(/)로 구분해서 그냥 편하게 쭉 적어주세요!</span>
+                <span class="example">(예) 원피스 M 1개, 티셔츠 L 2개 / 청바지 28 1개</span>
+            </div>
         </div>
 
         <p>주문하신 상품의 신속하고 안전한 배송을 위해 최선을 다하겠습니다.</p>
@@ -169,12 +294,9 @@
         <div class="features">
             <div class="feature-item">
                 <h3>🚀 신속하고 정확한 배송</h3>
-                
             </div>
-            
             <div class="feature-item">
                 <h3>💖 맞춤형 CS 지원</h3>
-                
             </div>
         </div>
     </div>
